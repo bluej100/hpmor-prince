@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<title>Harry Potter and the Methods of Rationality</title>
+<style>
+body {
+	font-size: 12pt;
+	font-family: "Garamond";
+	text-align: justify;
+}
+h1, h2, h3 {
+	text-align: center;
+	font-family: Lumos;
+	text-transform: uppercase;
+}
+p {
+	text-indent: 1em;
+}
+p.credits {
+	text-align: center;
+	font-family: Lumos;
+}
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+@media print {
+	body {
+		display: block;
+		counter-reset: page 1
+	}
+	@page {
+		size: 6in 9in;
+		margin: 0.5in;
+	}
+	@page:first {
+		margin-top: 2in;
+	}
+	@page chapter {
+		@top {
+			content: string(chapter-title);
+			font-family: "Lumos";
+			text-transform: uppercase;
+		}
+		@bottom {
+			content: counter(page);
+			font-family: "Lumos";
+		}
+	}
+	@page chapter:right {
+		@top {
+			content: string(chapter-number);
+		}
+	}
+	div.chapter {
+		page: chapter;
+	}
+	div.chapter h2 {
+		string-set: chapter-number content();
+	}
+	div.chapter h3 {
+		string-set: chapter-title content();
+	}
+	h2 {
+		page-break-before: always;
+	}
+	#toc a::after { content: leader(".") target-counter(attr(href), page); }
+}
+</style>
+<script>
+window.onload = function() {
+	var chapterTitles = document.getElementsByTagName('h3');
+	var ol = document.createElement('ol');
+	ol.id = 'toc';
+	document.body.insertBefore(ol, document.getElementsByTagName('h3')[0].parentNode);
+	for (var i = 0; i < chapterTitles.length; i++) {
+		var title = chapterTitles[i];
+		var li = document.createElement('li');
+		var a = document.createElement('a');
+		a.setAttribute('href', '#'+(i+1));
+		a.appendChild(document.createTextNode(title.firstChild.nodeValue));
+		li.appendChild(a);
+		ol.appendChild(li);
+	}
+	var header = document.createElement('h2');
+	header.appendChild(document.createTextNode('Contents'));
+	document.body.insertBefore(header, ol);
+}
+</script>
+</head>
+<body>
+<h1>Harry Potter and the Methods of Rationality</h1>
+<p class="credits">by LessWrong</p>
