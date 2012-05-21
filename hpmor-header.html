@@ -24,15 +24,24 @@ a {
 	text-decoration: none;
 	color: #000;
 }
+div.sep {
+	border: 1px solid #888888;
+	line-height: 0;
+	margin: 12pt auto;
+	width: 10em;
+}
 
 @media print {
 	body {
 		display: block;
 		counter-reset: page 1
 	}
+	p {
+		margin: 3pt;
+	}
 	@page {
 		size: 6in 9in;
-		margin: 0.5in;
+		margin: 0.75in;
 	}
 	@page:first {
 		margin-top: 2in;
