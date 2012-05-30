@@ -25,7 +25,7 @@ a {
 	color: #000;
 }
 div.sep {
-	border: 1px solid #888888;
+	border-top: 1px solid #888888;
 	line-height: 0;
 	margin: 12pt auto;
 	width: 10em;
@@ -37,12 +37,14 @@ div.sep {
 		counter-reset: page 1
 	}
 	p {
-		margin: 3pt;
+		margin: 0;
 	}
 	@page {
 		size: 6in 9in;
-		margin: 0.75in;
 	}
+	@page:left {margin: 0.875in 0.75in 0.875in 0.625in;} 
+	@page:right {margin: 0.875in 0.625in 0.875in 0.75in;} 
+
 	@page:first {
 		margin-top: 2in;
 	}
