@@ -15,7 +15,8 @@ header = open('hpmor-header.html', 'r')
 f.write(header.read())
 
 titlere = re.compile('<div id="chapter-title">Chapter \\d+: (.*?)<', re.DOTALL);
-contentre = re.compile("<div class='storycontent puretext' id='storycontent'>(.*?)</div>\n<div id='content'", re.DOTALL);
+contentre = re.compile("<div style='' class='storycontent' id='storycontent'>(.*?)</div>\n<div id=\"nav-bottom\"", re.DOTALL);
+garbagequotestr = chr(226)+chr(128)+chr(175)
 
 i = 1
 while end == 0 or i <= end:
@@ -27,6 +28,8 @@ while end == 0 or i <= end:
 	html = response.read()
 	title = titlere.search(html).group(1)
 	content = contentre.search(html).group(1)
+	content = content.replace(garbagequotestr, '')
+	
 	f.write('<div class="chapter">')
 	f.write('<h2><a name="'+str(i)+'">Chapter '+str(i)+'</a></h2>')
 	f.write('<h3>'+title+'</h3>')
