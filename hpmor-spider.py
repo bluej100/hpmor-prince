@@ -18,7 +18,7 @@ titlere = re.compile('<div id="chapter-title">Chapter \\d+: (.*?)<', re.DOTALL);
 contentre = re.compile("<div style='' class='storycontent' id='storycontent'>(.*?)</div>\n<div id=\"nav-bottom\"", re.DOTALL);
 garbagequotestr = chr(226)+chr(128)+chr(175)
 
-i = 1
+i = start
 while end == 0 or i <= end:
 	url = 'http://hpmor.com/chapter/'+str(i)
 	print url
@@ -31,12 +31,12 @@ while end == 0 or i <= end:
 	content = content.replace(garbagequotestr, '')
 	
 	f.write('<div class="chapter">')
-	f.write('<h2><a name="'+str(i)+'">Chapter '+str(i)+'</a></h2>')
+	f.write('<h2 id="'+str(i)+'">Chapter '+str(i)+'</h2>')
 	f.write('<h3>'+title+'</h3>')
 	f.write(content)
 	f.write('</div>')
 	i += 1
-	time.sleep(2+3*random.random())
+	time.sleep(1+3*random.random())
 
 footer = open('hpmor-footer.html', 'r')
 f.write(footer.read())

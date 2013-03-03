@@ -30,6 +30,12 @@ hr, div.sep {
 	margin: 1em auto;
 	width: 10em;
 }
+#toc {
+	list-style-type: none; 
+	padding: 0;
+	width: 25em;
+	margin: 0 auto;
+}
 
 @media print {
 	body {
@@ -89,8 +95,9 @@ window.onload = function() {
 		var title = chapterTitles[i];
 		var li = document.createElement('li');
 		var a = document.createElement('a');
-		a.setAttribute('href', '#'+(i+1));
-		a.appendChild(document.createTextNode(title.firstChild.nodeValue));
+		var chapter = title.previousSibling.id;
+		a.setAttribute('href', '#'+chapter);
+		a.appendChild(document.createTextNode(chapter+'. '+title.firstChild.nodeValue));
 		li.appendChild(a);
 		ol.appendChild(li);
 	}
